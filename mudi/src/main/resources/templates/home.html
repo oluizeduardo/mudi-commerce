@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8"/>
+		<title>Mudi | Home</title>
+	</head>
+	<body>
+		<div th:each="order : ${orders}">
+			<div th:text=${order.product.name}></div>
+			
+			<div>Valor: 
+				<span th:text=${order.negotiableValue}></span>
+			</div>
+			
+			<div>Data da Entrega:<span th:text=${order.deliveryDate}></span></div>
+			
+			
+			<div >Produto</div>
+			<div>
+				<input th:text=${order.product.urlProduct} value="URL do produto"/>
+			</div>
+			
+			<div>Descrição</div>
+			<div>
+				<textarea th:text=${order.description}>Descrição do pedido</textarea>
+			</div>
+			
+			<div>
+				<img th:src=${order.product.urlImage}>
+			</div>
+		</div>
+	</body>
+</html>
