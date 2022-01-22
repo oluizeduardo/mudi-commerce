@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	
+	<head th:replace="~{base::head}"></head>
+	
+	<body class="bg-info text-dark bg-opacity-10">
+		
+		<div class="logo-container mb-3 p-3 d-flex justify-content-between">
+			<span class="logo">Mudi</span>
+			<span class="mt-3">Login</span>
+		</div>
+	
+		<div class="container">
+	
+			<div class="p-5 bg-light rounded-3 border-bottom mb-3">
+				<h1 class="display-5">New Offer</h1>
+			</div>
+			
+			<div class="card">
+				<form class="card-body" th:object="${newOfferRequest}" action="/offer/newOffer" method="POST">
+					<legend>Describe the product you want to sell</legend>
+					
+					<div class="mb-3">
+						<label class="form-label" for="productName">Product</label>
+						<input th:field="*{productName}" class="form-control" th:errorclass="is-invalid" placeholder="Product's name" />
+						<small>Inform the product's name.</small>
+						<div class="invalid-feedback" th:errors="*{productName}"> </div>
+					</div>
+					
+					<div class="mb-3">
+						<label class="form-label" for="productprice">Price</label>
+						<input th:field="*{productPrice}" class="form-control" th:errorclass="is-invalid" placeholder="Product's price" />
+						<small>Inform the charged price.</small>
+						<div class="invalid-feedback" th:errors="*{productPrice}"> </div>
+					</div>
+					
+					<div class="mb-3">
+						<label class="form-label" for="productUrl">Url</label>
+						<input th:field="*{productUrl}" class="form-control" th:errorclass="is-invalid" placeholder="Product's url" />
+						<small>Paste here the url to the product you want.</small>
+						<div class="invalid-feedback" th:errors="*{productUrl}"> </div>
+					</div>
+					
+					<div class="mb-3">
+						<label class="form-label" for="productUrl">Image</label>
+						<input th:field="*{productImageUrl}" class="form-control" th:errorclass="is-invalid" placeholder="Image" />
+						<small>Paste here a link of a good image of the product you want.</small>
+						<div class="invalid-feedback" th:errors="*{productImageUrl}"> </div>
+					</div>
+					
+					<div class="mb-3">
+						<label class="form-label" for="description">Description</label>
+						<textarea th:field="*{description}" class="form-control" placeholder="Product's description"></textarea>
+						<small>Space to include a quick description.</small>
+					</div>
+					
+					<button class="btn btn-primary mt-3" type="submit">Save</button>
+				</form>
+			</div>
+			
+		</div>
+	</body>
+</html>

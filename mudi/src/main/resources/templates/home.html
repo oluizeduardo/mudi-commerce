@@ -1,32 +1,86 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8"/>
-		<title>Mudi | Home</title>
-	</head>
-	<body>
-		<div th:each="order : ${orders}">
-			<div th:text=${order.product.name}></div>
+	
+	<head th:replace="~{base::head}"></head>
+	
+	<body class="bg-info text-dark bg-opacity-10">
+	
+		<div class="logo-container mb-3 p-3 d-flex justify-content-between">
+			<span class="logo">Mudi</span>
+			<span class="mt-3">Login</span>
+		</div>
+	
+	
+		<div class="container">
 			
-			<div>Valor: 
-				<span th:text=${order.negotiableValue}></span>
+			<div class="p-5 bg-light rounded-3 border-bottom">
+				<h1 class="display-5">My Offers</h1>
 			</div>
 			
-			<div>Data da Entrega:<span th:text=${order.deliveryDate}></span></div>
-			
-			
-			<div >Produto</div>
-			<div>
-				<input th:text=${order.product.urlProduct} value="URL do produto"/>
-			</div>
-			
-			<div>Descrição</div>
-			<div>
-				<textarea th:text=${order.description}>Descrição do pedido</textarea>
-			</div>
-			
-			<div>
-				<img th:src=${order.product.urlImage}>
+			<!-- NAV BAR -->
+			<nav class="navbar navbar-expand navbar-light bg-light d-flex justify-content-between mb-3 p-3">
+				<div class="navbar-nav ml-3">
+					<a class="nav-item nav-link active" href="">All</a> 					
+					<a class="nav-item nav-link" href="">Sold</a>
+					<a class="nav-item nav-link" href="">Dispatched</a> 
+					<a class="nav-item nav-link" href="">Delivered</a>
+				</div>
+				<a href="offer/formNewOffer">					
+					<button type="button" class="btn btn-outline-success my-2 my-sm-0" 
+							data-bs-toggle="tooltip" data-bs-placement="bottom" 
+							title="Sell a new product">New
+					</button>
+					
+				</a>
+			</nav>
+	
+			<div
+				class="card bg-light.bg-gradient p-2 text-dark bg-opacity-25 mb-3"
+				th:each="offer : ${offers}">
+	
+				<!-- Product's name. -->
+				<div class="card-header" th:text=${offer.product.name}></div>
+	
+				<div class="card-body">
+					<div class="row">
+	
+						<div class="col-12 col-sm-8 mb-3">
+	
+							<div class="row mb-2">
+	
+								<!-- Product's price. -->
+								<div class="col-md-5">
+									Price: <span th:text=${offer.product.price}></span>
+								</div>
+	
+								<!-- Product's delivery date. -->
+								<div class="col-md-7">
+									Offered in: <span th:text=${offer.registrationDate}></span>
+								</div>
+							</div>
+	
+	
+							<!-- Product's url. -->
+							<div class="mb-2">Product's url</div>
+							<div>
+								<input class="form-control mb-2"
+									th:value=${offer.product.urlProduct} value="Product's url" />
+							</div>
+	
+							<div class="mb-2">Description</div>
+							<div>
+								<textarea class="form-control mb-2" th:text=${offer.product.description}></textarea>
+							</div>
+						</div>
+	
+						<div class="col-12 col-sm-4">
+							<div>
+								<img class="img-thumbnail rounded-3"
+									th:src=${offer.product.urlImage}>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</body>
