@@ -5,6 +5,8 @@ import java.math.BigDecimal;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 
+import org.hibernate.validator.constraints.Length;
+
 import com.sun.istack.NotNull;
 
 import br.com.mudi.model.Offer;
@@ -36,6 +38,7 @@ public class NewOfferRequest {
 	@NotBlank
 	private String productImageUrl;
 
+	@Length(max = 500)
 	private String description;
 	
 	

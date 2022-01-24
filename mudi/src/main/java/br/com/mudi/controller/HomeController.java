@@ -2,7 +2,7 @@ package br.com.mudi.controller;
 
 import java.util.List;
 
-import javax.websocket.OnError;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,6 +34,7 @@ public class HomeController {
 	}
 	
 	@GetMapping("offers/{status}")
+	@Transactional
 	public String byStatus(@PathVariable("status") String status, Model model) {
 		
 		List<Offer> offers = offerRepository.findByStatus(StatusOffer.valueOf(status.toUpperCase()));
