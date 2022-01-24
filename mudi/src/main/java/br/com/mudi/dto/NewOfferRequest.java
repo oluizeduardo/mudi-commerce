@@ -2,7 +2,6 @@ package br.com.mudi.dto;
 
 import java.math.BigDecimal;
 
-import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 
@@ -10,6 +9,7 @@ import com.sun.istack.NotNull;
 
 import br.com.mudi.model.Offer;
 import br.com.mudi.model.Product;
+import br.com.mudi.model.StatusOffer;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,8 +27,7 @@ public class NewOfferRequest {
 	private String productName;
 	
 	@NotNull
-	@DecimalMin(value = "0.01", inclusive = false)
-    @Digits(integer=3, fraction=2)
+	@Digits(integer = 9, fraction = 2)
 	private BigDecimal productPrice;
 	
 	@NotBlank
@@ -55,6 +54,7 @@ public class NewOfferRequest {
 		
 		Offer order = new Offer();
 		order.setProduct(product);
+		order.setStatus(StatusOffer.ON_SALE);
 
 		return order;
 	}

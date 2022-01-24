@@ -39,7 +39,7 @@ public class OfferController {
 		Offer offer = newOfferRequest.toOffer();
 		offerRepository.save(offer);
 		
-		return "home";
+		return "redirect:/home";
 	}
 	
 }

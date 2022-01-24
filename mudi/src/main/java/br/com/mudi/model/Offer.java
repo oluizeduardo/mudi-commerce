@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -38,4 +40,6 @@ public class Offer {
 	@Column(name="registration_date")
 	private LocalDate registrationDate = LocalDate.now();
 	
+	@Enumerated(EnumType.STRING)
+	private StatusOffer status;	
 }
