@@ -3,43 +3,42 @@
 	
 	<head th:replace="~{base::head}"></head>
 	
+	<title>Mudi | Home</title>
+	
 	<body class="bg-info text-dark bg-opacity-10">
 	
-		<div class="logo-container mb-3 p-3 d-flex justify-content-between">
-			<span class="logo">Mudi</span>
-			<span class="mt-3">Login</span>
-		</div>
-	
-	
+		<div th:replace="~{base.html::logo}"></div>
+		
 		<div class="container">
 			
-			<div class="p-5 bg-light rounded-3 border-bottom">
-				<h1 class="display-5">My Offers</h1>
-			</div>
+			<div th:replace="~{base.html::title('My Offers')}"></div>
 			
 			<!-- NAV BAR -->
-			<nav class="navbar navbar-expand navbar-light bg-light d-flex justify-content-between mb-3 p-3">
+			<nav class="navbar navbar-expand navbar-light bg-light d-flex justify-content-between mb-2 p-3 sticky-top">
 				<div class="navbar-nav ml-3">
-					<a class="nav-item nav-link active" href="">All</a> 					
-					<a class="nav-item nav-link" href="">Sold</a>
-					<a class="nav-item nav-link" href="">Dispatched</a> 
-					<a class="nav-item nav-link" href="">Delivered</a>
+					<a th:classappend="${status} == null ? 'active'" class="nav-item nav-link" href="/home">All</a> 	
+					<a th:classappend="${status} == 'on_sale' ? 'active'" class="nav-item nav-link" href="/home/offers/on_sale">On Sale</a> 				
+					<a th:classappend="${status} == 'sold' ? 'active'" class="nav-item nav-link" href="/home/offers/sold">Sold</a>
+					<a th:classappend="${status} == 'dispatched' ? 'active'" class="nav-item nav-link" href="/home/offers/dispatched">Dispatched</a> 
+					<a th:classappend="${status} == 'delivered' ? 'active'" class="nav-item nav-link" href="/home/offers/delivered">Delivered</a>
 				</div>
-				<a href="offer/formNewOffer">					
-					<button type="button" class="btn btn-outline-success my-2 my-sm-0" 
+				<a href="/offer/formNewOffer">					
+					<button type="button" class="btn btn-primary my-2 my-sm-0" 
 							data-bs-toggle="tooltip" data-bs-placement="bottom" 
-							title="Sell a new product">New
+							title="Sell a new product">New offer
 					</button>
-					
 				</a>
 			</nav>
 	
-			<div
-				class="card bg-light.bg-gradient p-2 text-dark bg-opacity-25 mb-3"
+			<div class="card bg-light.bg-gradient p-2 text-dark bg-opacity-25 mb-3"
 				th:each="offer : ${offers}">
 	
-				<!-- Product's name. -->
-				<div class="card-header" th:text=${offer.product.name}></div>
+				<th:block th:switch="${offer.status.name()}">
+					<div th:case="'ON_SALE'" class="card-header alert-success" th:text=${offer.product.name}></div>
+					<div th:case="'SOLD'" class="card-header alert-warning" th:text=${offer.product.name}></div>
+					<div th:case="'DISPATCHED'" class="card-header alert-primary" th:text=${offer.product.name}></div>
+					<div th:case="'DELIVERED'" class="card-header alert-danger" th:text=${offer.product.name}></div>
+				</th:block>
 	
 				<div class="card-body">
 					<div class="row">
@@ -50,38 +49,38 @@
 	
 								<!-- Product's price. -->
 								<div class="col-md-5">
-									Price: <span th:text=${offer.product.price}></span>
+									Price: <span th:text="${#numbers.formatDecimal(offer.product.price,3,'POINT',2,'COMMA')}"></span>
 								</div>
 	
 								<!-- Product's delivery date. -->
 								<div class="col-md-7">
-									Offered in: <span th:text=${offer.registrationDate}></span>
+									Offered in: <span th:text="${#temporals.format(offer.registrationDate, 'dd/MM/yyyy')}"></span>
 								</div>
 							</div>
 	
 	
 							<!-- Product's url. -->
-							<div class="mb-2">Product's url</div>
+							<div class="mb-2">Link to this product:</div>
 							<div>
 								<input class="form-control mb-2"
-									th:value=${offer.product.urlProduct} value="Product's url" />
+									th:value="${offer.product.urlProduct}"/>
 							</div>
 	
-							<div class="mb-2">Description</div>
+							<div class="mb-2">Description:</div>
 							<div>
-								<textarea class="form-control mb-2" th:text=${offer.product.description}></textarea>
-							</div>
+								<textarea disabled style="height: 150px" class="form-control mb-2" th:text="${offer.product.description}"></textarea>
+							</div> 
 						</div>
 	
 						<div class="col-12 col-sm-4">
 							<div>
 								<img class="img-thumbnail rounded-3"
-									th:src=${offer.product.urlImage}>
+									th:src="${offer.product.urlImage}">
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+		</div>	
 	</body>
 </html>
