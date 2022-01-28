@@ -17,14 +17,14 @@
 					<legend>Describe the product you want to sell</legend>
 					
 					<div class="row">
-						<div class="mb-3 col-md-8">
+						<div class="mb-3 col-md-9">
 							<label class="form-label" for="productName">Product</label>
 							<input th:field="*{productName}" class="form-control" th:errorclass="is-invalid" placeholder="Product's name" required/>
 							<small>Inform the product's name.</small>
 							<div class="invalid-feedback" th:errors="*{productName}"> </div>
 						</div>
 						
-						<div class="mb-3 col-md-4">
+						<div class="mb-3 col-md-3">
 							<label class="form-label" for="productprice">Price</label>
 							<input th:field="*{productPrice}" 
 									class="form-control" 
