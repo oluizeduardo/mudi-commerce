@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	
+	<head th:replace="~{base::head}"></head>
+	
+	<title>Mudi | Login</title>
+	
+	<body class="bg-info text-dark bg-opacity-10">
+	
+		<div th:replace="~{base.html::logo}"></div>
+		
+		<div class="container mt-5" style="width: 450px">
+			
+			<div th:replace="~{base.html::title('Login')}"></div>
+	
+			
+			<div class="card mb-3 border">
+				<form th:action="@{/login}" class="card-body px-4 py-3" method="POST">
+				
+					<div class="mb-3 form-group">
+						<label class="form-label" for="username">Username</label>
+						<input type="text" name="username" class="form-control" placeholder="username" required/>
+					</div>
+					
+					<div class="mb-3 form-group">
+						<label class="form-label" for="password">Password</label>
+						<input type="password" name="password" class="form-control" placeholder="password" required/>				
+					</div>
+					
+					<button class="btn btn-primary" type="submit">Login</button>
+				</form>
+			</div>
+			
+		</div>	
+	</body>
+</html>
