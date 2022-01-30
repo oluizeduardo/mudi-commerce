@@ -15,21 +15,89 @@
 	
 			
 			<div class="card mb-3 border"> 
-				<form th:action="@{/login}" class="card-body px-4 py-3" method="POST">
+
+				<!-- Nav tabs -->
+				<ul class="nav nav-tabs nav-justified">
+				  
+				  <!-- TAB LOGIN -->
+				  <li class="nav-item" onclick="addActiveClassInLoginTab()">
+				    <a id="tab-login" class="nav-link active" data-toggle="tab" href="#pn-login">Login</a>
+				  </li>
+				  
+				  <!-- TAB REGISTER -->
+				  <li class="nav-item" onclick="addActiveClassInRegisterTab()">
+				    <a id="tab-register" class="nav-link" data-toggle="tab" href="#pn-register">Register</a>
+				  </li>
+				</ul>
 				
-					<div class="mb-3 form-group">
-						<label class="form-label" for="username">Username</label>
-						<input type="text" name="username" class="form-control" placeholder="username" required/>
-					</div>
-					
-					<div class="mb-3 form-group">
-						<label class="form-label" for="password">Password</label>
-						<input type="password" name="password" class="form-control" placeholder="password" required/>				
-					</div>
-					
-					<button class="btn btn-primary" type="submit">Login</button>
-				</form>	
+				<!-- Tab panes -->
+				<div class="tab-content">
+				  
+				  <!-- Login panel -->
+				  <div class="tab-pane container active" id="pn-login">
+				  	<form th:action="@{/login}" class="card-body px-4 py-3" method="POST">
+				
+						<div class="mb-3 form-group">
+							<label class="form-label" for="username">Username</label>
+							<input type="text" name="username" class="form-control" placeholder="Username" required/>
+						</div>
+						
+						<div class="mb-3 form-group">
+							<label class="form-label" for="password">Password</label>
+							<input type="password" name="password" class="form-control" placeholder="Password" required/>				
+						</div>
+						
+						<button class="btn btn-primary" type="submit">Login</button>
+					</form>				  
+				  </div>
+				  
+				  <!-- Register panel -->
+				  <div class="tab-pane container" id="pn-register">
+				  
+				  	<form class="card-body px-4 py-3" method="POST">
+				
+						<div class="mb-3 form-group">
+							<label class="form-label" for="username">Username</label>
+							<input type="text" name="username" class="form-control" placeholder="Username" required/>
+						</div>
+						
+						<div class="mb-3 form-group">
+							<label class="form-label" for="password">Password</label>
+							<input type="password" name="password" class="form-control" placeholder="Password" required/>				
+						</div>
+						
+						<div class="mb-3 form-group">
+							<label class="form-label" for="password">Confirm password</label>
+							<input type="password" name="confirm-password" class="form-control" placeholder="Confirm password" required/>				
+						</div>
+						
+						<button class="btn btn-primary" type="submit">Register</button>
+					</form>
+				  
+				  </div>
+				</div>
 			</div>			
 		</div>	
 	</body>
+	<script type="text/javascript">
+
+		function addActiveClassInRegisterTab()
+		{
+			document.querySelector('#tab-login').classList.remove('active');
+			document.querySelector('#pn-login').classList.remove('active');
+			
+			document.querySelector('#tab-register').classList.add('active');
+			document.querySelector('#pn-register').classList.add('active');
+		}
+		
+		function addActiveClassInLoginTab()
+		{
+			document.querySelector('#tab-register').classList.remove('active');
+			document.querySelector('#pn-register').classList.remove('active');
+			
+			document.querySelector('#tab-login').classList.add('active');
+			document.querySelector('#pn-login').classList.add('active');
+		}
+		
+	</script>
 </html>
